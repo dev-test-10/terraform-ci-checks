@@ -23,5 +23,5 @@ module "log_analytics" {
   location            = "westeurope"
 
   daily_quota_gb    = 10
-  retention_in_days = 35
+  retention_in_days = 30
 }
