@@ -24,10 +24,10 @@ jobs:
           terraform_version: "1.17.0"
 
       - name: Check formatting
-        runs: terraform fmt -check -recursive
+        run: terraform fmt -check -recursive
 
       - name: Initialise with no backend
-        runs: terraform init -backend=false -input=false
+        run: terraform init -backend=false -input=false
 
       - name: Validate
-        runs: terraform validate
+        run: terraform validate
