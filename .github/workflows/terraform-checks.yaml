@@ -1,0 +1,33 @@
+name: Terraform cehcks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: fmt and validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps: 
+      - names: Check out code
+        uses: actions/checkout@v7
+
+      - name: Set up Terraform
+        uses: hashicorp/set-terraform@v4
+        with:
+          terraform_version: "1.17.0"
+
+      - name: Check formatting
+        runs: terraform fmt -check -recursive
+
+      - name: Initialise with no backend
+        runs: terraform init -backend=false -input=false
+
+      - name: Validate
+        runs: terraform validate
