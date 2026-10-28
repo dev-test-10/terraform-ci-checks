@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps: 
-      - names: Check out code
+      - name: Check out code
         uses: actions/checkout@v7
 
       - name: Set up Terraform
