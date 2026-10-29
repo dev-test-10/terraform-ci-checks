@@ -1,0 +1,33 @@
+name: Terraform checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: fmt and validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: check out code
+        uses: actions/checkout@v7
+
+      - name: set up terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.17.0"
+
+      - name: check formatting
+        run: terraform fmt -check -recursive
+
+      - name: initialise with no backend
+        run: terraform init -backend=false -input=false
+
+      - name: validate
+        run: terraform validate
